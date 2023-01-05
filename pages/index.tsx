@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 /* export const useInput = (initialState: string | number) => {
   const [value, setValue] = useState(initialState);
@@ -12,13 +13,19 @@ import styled from 'styled-components';
   };
   return [value, onChange] as const;
 }; */
-const useInput = (initialValue: string | number) => {
+export const useInput = (initialValue: string | number) => {
   const [value, setValue] = useState(initialValue);
   const handler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   }, []);
   return [value, handler, setValue] as const;
 };
+
+const LoginSignUp = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const Home = () => {
   const [email, onChangeEmail] = useInput('');
@@ -55,7 +62,7 @@ const Home = () => {
       </Head>
       <form onSubmit={onSubmit}>
         <div>
-          <label htmlFor="user-email">이메일</label>
+          {/* <label htmlFor="user-email">이메일</label> */}
           <br />
           <input
             id="user-email"
@@ -66,7 +73,7 @@ const Home = () => {
             placeholder="e-mail"
           />
         </div>
-
+        {/*
         <div>
           <label htmlFor="user-nick">닉네임</label>
           <br />
@@ -77,16 +84,20 @@ const Home = () => {
             onChange={onChangeNickname}
           />
         </div>
+        */}
         <div>
-          <label htmlFor="user-password">패스워드</label>
+          {/* <label htmlFor="user-password">패스워드</label> */}
           <br />
           <input
             id="user-password"
             value={password}
             required
             onChange={onChangePassword}
+            placeholder="password"
           />
         </div>
+
+        {/*
         <div>
           <label htmlFor="user-password-check">비밀번호체크</label>
           <br />
@@ -97,12 +108,15 @@ const Home = () => {
             onChange={onChangePasswordCheck}
           />
         </div>
-        <div></div>
-        <div style={{ marginTop: '10px' }}>
-          <button type="submit">가입하기</button>
+        */}
+        <br />
+        <div>
+          <button type="submit">Login</button>
         </div>
       </form>
-      {passwordError ? 'error T' : 'error F'}
+      <Link href="/signup">
+        <LoginSignUp>sign up?</LoginSignUp>
+      </Link>
     </>
   );
 };
