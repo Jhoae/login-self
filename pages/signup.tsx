@@ -2,14 +2,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { useInput } from './index';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 interface Button {
   cantProgress: boolean;
 }
 
 const Button = styled.button<Button>`
-  //  color: ${(props) => (props.cantProgress ? 'red' : 'blue')};
   opacity: ${(props) => (props.cantProgress ? 0.5 : 1)};
+  color: ${(props) => (props.cantProgress ? 'red' : 'blue')};
 `;
 
 const SignUp = () => {
@@ -17,6 +18,16 @@ const SignUp = () => {
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [passwordCheck, setPasswordCheck] = useState('');
+
+  const [everyFull, setEveryFull] = useState(false);
+
+  useEffect(() => {
+    if (email && nickname && password && passwordCheck) {
+      setEveryFull(true);
+    } else {
+      setEveryFull(false);
+    }
+  }, [email, nickname, password, passwordCheck]);
 
   //  const [passwordError, setPasswordError] = useState(false);
 
@@ -56,6 +67,9 @@ const SignUp = () => {
 
   return (
     <>
+      <Link href="/">
+        <button>ㅁ</button>
+      </Link>
       <form onSubmit={onSubmit}>
         <div>
           {/* <label htmlFor="user-email">이메일</label> */}
@@ -104,17 +118,19 @@ const SignUp = () => {
           />
         </div>
         <div>
-          <Button cantProgress={cantProgress} type="submit">
+          <Button cantProgress={cantProgress || !everyFull} type="submit">
             Sign up
           </Button>
         </div>
       </form>
-
-      {!password || password !== passwordCheck
-        ? '비밀번호 !== 비밀번호-check'
-        : '비밀번호 === 비밀번호-check'}
-      <br />
-      {cantProgress ? 'cantProgress' : 'GoNext'}
+      {everyFull ? <p>everyFull</p> : <strong>빈칸있음</strong>} &{' '}
+      {cantProgress ? (
+        <strong>'비밀번호 서로 다름'</strong>
+      ) : (
+        <p>'비밀번호 체크 완료'</p>
+      )}
+      =&gt;
+      {everyFull && !cantProgress ? <p>가입 활성화</p> : <p>가입 비활성화</p>}
     </>
   );
 };
