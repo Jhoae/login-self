@@ -1,8 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+//IPhone 14 - 7 페이지
+
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useInput } from './index';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import InputForm from '../components/InputForm';
 
 interface Button {
   cantProgress: boolean;
@@ -68,62 +71,47 @@ const SignUp = () => {
   return (
     <>
       <Link href="/">
-        <button>ㅁ</button>
+        <button>개발용 - 홈버튼</button>
       </Link>
       <form onSubmit={onSubmit}>
-        <div>
-          {/* <label htmlFor="user-email">이메일</label> */}
-          <br />
-          <input
-            id="user-email"
-            type="email"
-            value={email}
-            required
-            onChange={onChangeEmail}
-            placeholder="e-mail"
-          />
-        </div>
-        <div>
-          {/* <label htmlFor="user-password">패스워드</label> */}
-          <br />
-          <input
-            id="user-password"
-            value={password}
-            required
-            onChange={onChangePassword}
-            placeholder="password"
-          />
-        </div>
-        <div>
-          {/* <label htmlFor="user-password-check">비밀번호체크</label> */}
-          <br />
-          <input
-            id="user-password-check"
-            value={passwordCheck}
-            required
-            onChange={onChangePasswordCheck}
-            placeholder="password-check"
-          />
-        </div>
+        <InputForm
+          value={email}
+          onChange={onChangeEmail}
+          placeholder="e-mail"
+          type="email"
+        />
+        <br />
+        <InputForm
+          value={password}
+          onChange={onChangePassword}
+          placeholder="password"
+          type="password"
+        />
+        <br />
+        <InputForm
+          value={passwordCheck}
+          onChange={onChangePasswordCheck}
+          placeholder="password-check"
+          type="password"
+        />
+
         <p>how do we call you?</p>
-        <div>
-          {/* <label htmlFor="user-nick">닉네임</label> */}
-          <br />
-          <input
-            id="user-nick"
-            value={nickname}
-            required
-            onChange={onChangeNickname}
-            placeholder="nickname"
-          />
-        </div>
+        <InputForm
+          value={nickname}
+          onChange={onChangeNickname}
+          placeholder="nickname"
+          type="text"
+        />
         <div>
           <Button cantProgress={cantProgress || !everyFull} type="submit">
             Sign up
           </Button>
         </div>
       </form>
-      {everyFull ? <p>everyFull</p> : <strong>빈칸있음</strong>} &{' '}
+      {/* */}
+      {/* */}
+      {/*아래는 개발할때 보기좋게 작성한 주석코드 */}
+      {everyFull ? <p>빈칸 없음</p> : <strong>빈칸있음</strong>} &{' '}
       {cantProgress ? (
         <strong>'비밀번호 서로 다름'</strong>
       ) : (

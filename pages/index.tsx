@@ -1,18 +1,11 @@
+//IPhone 14 - 6 페이지
+
 import React, { useCallback, useState } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
+import InputForm from '../components/InputForm';
 
-/* export const useInput = (initialState: string | number) => {
-  const [value, setValue] = useState(initialState);
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-    setValue(value);
-  };
-  return [value, onChange] as const;
-}; */
 export const useInput = (initialValue: string | number) => {
   const [value, setValue] = useState(initialValue);
   const handler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,55 +54,20 @@ const Home = () => {
         <title>login</title>
       </Head>
       <form onSubmit={onSubmit}>
-        <div>
-          {/* <label htmlFor="user-email">이메일</label> */}
-          <br />
-          <input
-            id="user-email"
-            type="email"
-            value={email}
-            required
-            onChange={onChangeEmail}
-            placeholder="e-mail"
-          />
-        </div>
-        {/*
-        <div>
-          <label htmlFor="user-nick">닉네임</label>
-          <br />
-          <input
-            id="user-nick"
-            value={nickname}
-            required
-            onChange={onChangeNickname}
-          />
-        </div>
-        */}
-        <div>
-          {/* <label htmlFor="user-password">패스워드</label> */}
-          <br />
-          <input
-            id="user-password"
-            value={password}
-            required
-            onChange={onChangePassword}
-            placeholder="password"
-          />
-        </div>
-
-        {/*
-        <div>
-          <label htmlFor="user-password-check">비밀번호체크</label>
-          <br />
-          <input
-            id="user-password-check"
-            value={passwordCheck}
-            required
-            onChange={onChangePasswordCheck}
-          />
-        </div>
-        */}
+        <InputForm
+          type="email"
+          value={email}
+          onChange={onChangeEmail}
+          placeholder="email"
+        />
         <br />
+        <InputForm
+          type="password"
+          value={password}
+          onChange={onChangePassword}
+          placeholder="password"
+        />
+
         <div>
           <button type="submit">Login</button>
         </div>
