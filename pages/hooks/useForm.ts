@@ -36,7 +36,7 @@ function useForm({
     setSubmitting(true);
     event.preventDefault();
     await new Promise(() =>
-      setTimeout(() => console.log('서버에 데이터 전송 성공'), 1000),
+      setTimeout(() => console.log('서버에 데이터 전송 시도'), 1000),
     );
 
     // Promise 대신, 서버에 전송하는 코드 필요 : axios.post(values ...)
@@ -53,10 +53,11 @@ function useForm({
         onSubmit(values);
       } else {
         console.log('에러 발견');
+        alert(JSON.stringify(errors));
       }
       setSubmitting(false);
     }
-  }, [errors]);
+  }, [submitting, errors]);
 
   return {
     values,

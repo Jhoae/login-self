@@ -6,7 +6,7 @@ import Link from 'next/link';
 import InputForm from '../components/InputForm';
 import styled from 'styled-components';
 
-const Button = styled.button`
+export const Button = styled.button`
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   color: ${(props) => (props.disabled ? 'red' : 'blue')};
 `;
@@ -84,7 +84,7 @@ function LoginForm() {
         <br />
 
         <Button type="submit" disabled={Object.keys(errors).length !== 0}>
-          새거
+          회원가입
         </Button>
       </form>
     </>

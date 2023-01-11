@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import InputForm from '../components/InputForm';
 import { useInput } from './hooks/useInput';
+import validate from '../components/validate';
+import useForm from './hooks/useForm';
+import { Button } from './Newsignup';
 
 const LoginSignUp = styled.div`
   &:hover {
@@ -14,42 +17,59 @@ const LoginSignUp = styled.div`
 `;
 
 const Home = () => {
-  const [email, onChangeEmail] = useInput('');
-  const [password, onChangePassword] = useInput('');
+  const { values, errors, submitting, handleChange, handleSubmit } = useForm({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: () => {},
+    validate,
+  });
 
   const onLogin = useCallback(() => {
     console.log('로그인');
-  }, [email, password]);
+  }, [values.email, values.password]);
 
   return (
     <>
       <Head>
         <title>login</title>
       </Head>
-      <form onSubmit={onLogin}>
+      <form onSubmit={handleSubmit}>
         <InputForm
           type="email"
           name="email"
-          value={email}
-          onChange={onChangeEmail}
+          value={values.email}
+          onChange={handleChange}
           placeholder="email"
         />
         <br />
         <InputForm
           type="password"
           name="password"
-          value={password}
-          onChange={onChangePassword}
+          value={values.password}
+          onChange={handleChange}
           placeholder="password"
         />
 
         <div>
-          <button type="submit">Login</button>
+          <Button
+            type="submit"
+            // disabled={Object.keys(errors).length !== 0}
+          >
+            Login
+          </Button>
         </div>
       </form>
-      <Link href="/signupup">
+      <Link href="/Newsignup">
         <LoginSignUp>sign up?</LoginSignUp>
       </Link>
+
+      {errors.email && <span className="errorMessage">{errors.email}</span>}
+      <br />
+      {errors.password && (
+        <span className="errorMessage">{errors.password}</span>
+      )}
     </>
   );
 };
