@@ -1,15 +1,15 @@
 //IPhone 14 - 7 페이지
 
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useInput } from './index';
+import { useCallback, useEffect, useState } from 'react';
+import { useInput } from './hooks/useInput';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import InputForm from '../components/InputForm';
 
-interface Button {
+type Button = {
   cantProgress: boolean;
-}
+};
 
 const Button = styled.button<Button>`
   opacity: ${(props) => (props.cantProgress ? 0.5 : 1)};
@@ -20,8 +20,8 @@ const SignUp = () => {
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
-  const [passwordCheck, setPasswordCheck] = useState('');
 
+  const [passwordCheck, setPasswordCheck] = useState('');
   const [everyFull, setEveryFull] = useState(false);
 
   useEffect(() => {
@@ -44,8 +44,8 @@ const SignUp = () => {
     [password],
   );
 
-  const router = useRouter();
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const router = useRouter();
     if (!cantProgress) {
       alert('회원가입 신청');
       router.push('/');
@@ -77,6 +77,7 @@ const SignUp = () => {
         <InputForm
           value={email}
           onChange={onChangeEmail}
+          name="email"
           placeholder="e-mail"
           type="email"
         />
@@ -84,6 +85,7 @@ const SignUp = () => {
         <InputForm
           value={password}
           onChange={onChangePassword}
+          name="password"
           placeholder="password"
           type="password"
         />
@@ -91,6 +93,7 @@ const SignUp = () => {
         <InputForm
           value={passwordCheck}
           onChange={onChangePasswordCheck}
+          name="password-check"
           placeholder="password-check"
           type="password"
         />
@@ -99,6 +102,7 @@ const SignUp = () => {
         <InputForm
           value={nickname}
           onChange={onChangeNickname}
+          name="nickname"
           placeholder="nickname"
           type="text"
         />

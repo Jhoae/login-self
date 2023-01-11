@@ -1,24 +1,29 @@
 interface IInputProps {
   value: string | number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
+  name: string;
+  className?: string;
+  id?: string;
+  placeholder?: string;
   type?: string;
   required?: boolean;
-  id?: string;
 }
 
 export default function InputForm({
   value,
   onChange,
-  placeholder,
-  type,
-  required = true, // 기본적으로 필수작성 요구
+  name,
+  className,
   id,
+  placeholder,
+  type = 'text',
+  required = true, // 기본적으로 필수작성 요구
 }: IInputProps) {
   return (
     <input
-      id={id}
       type={type}
+      name={name}
+      id={id}
       value={value}
       required={required}
       onChange={onChange}

@@ -1,18 +1,11 @@
 //IPhone 14 - 6 페이지
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
 import InputForm from '../components/InputForm';
-
-export const useInput = (initialValue: string | number) => {
-  const [value, setValue] = useState(initialValue);
-  const handler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  }, []);
-  return [value, handler, setValue] as const;
-};
+import { useInput } from './hooks/useInput';
 
 const LoginSignUp = styled.div`
   &:hover {
@@ -22,40 +15,21 @@ const LoginSignUp = styled.div`
 
 const Home = () => {
   const [email, onChangeEmail] = useInput('');
-  const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
 
-  const [passwordCheck, setPasswordCheck] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
-  const onChangePasswordCheck = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPasswordCheck(e.target.value);
-      setPasswordError(e.target.value !== password);
-    },
-    [password],
-  );
-
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (password !== passwordCheck) {
-        return setPasswordError(true);
-      }
-      if (password === passwordCheck) {
-        return setPasswordError(false);
-      }
-    },
-    [email, password, passwordCheck],
-  );
+  const onLogin = useCallback(() => {
+    console.log('로그인');
+  }, [email, password]);
 
   return (
     <>
       <Head>
         <title>login</title>
       </Head>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onLogin}>
         <InputForm
           type="email"
+          name="email"
           value={email}
           onChange={onChangeEmail}
           placeholder="email"
@@ -63,6 +37,7 @@ const Home = () => {
         <br />
         <InputForm
           type="password"
+          name="password"
           value={password}
           onChange={onChangePassword}
           placeholder="password"
@@ -72,7 +47,7 @@ const Home = () => {
           <button type="submit">Login</button>
         </div>
       </form>
-      <Link href="/signup">
+      <Link href="/signupup">
         <LoginSignUp>sign up?</LoginSignUp>
       </Link>
     </>
