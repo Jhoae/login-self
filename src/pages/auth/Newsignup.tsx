@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import useForm from './hooks/useForm';
-import validate from '../components/validate';
-import { StringType } from './hooks/useForm';
+import useForm, { StringType } from '../../hooks/common/useForm';
+import validate from '../../utils/validate';
 import Link from 'next/link';
-import InputForm from '../components/InputForm';
+import InputForm from '../../components/atoms/InputForm';
 import styled from 'styled-components';
 
 export const Button = styled.button`

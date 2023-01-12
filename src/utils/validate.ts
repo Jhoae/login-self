@@ -1,4 +1,4 @@
-import { StringType } from '../pages/hooks/useForm';
+import { StringType } from '../hooks/common/useForm';
 
 export default function validate(values: StringType): StringType {
   const errors: StringType = {};

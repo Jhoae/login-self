@@ -1,11 +1,11 @@
 //IPhone 14 - 7 페이지
 
 import { useCallback, useEffect, useState } from 'react';
-import { useInput } from './hooks/useInput';
+import { useInput } from '../../../hooks/useInput';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import InputForm from '../components/InputForm';
+import InputForm from '../InputForm';
 
 type Button = {
   cantProgress: boolean;

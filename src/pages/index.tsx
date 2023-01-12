@@ -4,11 +4,10 @@ import React, { useCallback } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Link from 'next/link';
-import InputForm from '../components/InputForm';
-import { useInput } from './hooks/useInput';
-import validate from '../components/validate';
-import useForm from './hooks/useForm';
-import { Button } from './Newsignup';
+import InputForm from '../components/atoms/InputForm';
+import validate from '../utils/validate';
+import useForm from '../hooks/common/useForm';
+import { Button } from '../pages/auth/Newsignup';
 
 const LoginSignUp = styled.div`
   &:hover {
@@ -61,7 +60,7 @@ const Home = () => {
           </Button>
         </div>
       </form>
-      <Link href="/Newsignup">
+      <Link href="auth/Newsignup">
         <LoginSignUp>sign up?</LoginSignUp>
       </Link>
 
